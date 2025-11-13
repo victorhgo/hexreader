@@ -3,7 +3,7 @@
 
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Wextra -std=c11 -Iinclude
+CFLAGS := -Wall -Wextra -std=c11 -Iinclude -Wunused-function
 
 # Directories
 SRC_DIR := src

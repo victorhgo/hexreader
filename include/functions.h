@@ -5,11 +5,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/* isprint() - Checks if the given character can be printed */
+#include<ctype.h>
+
+/* strcmp() - To compare two strings*/
+#include<string.h>
+
 /* Some useful macros */
-#define OPENFILE fopen(argv[1], "rb")
 #define PRESS_KEY system( "read -n 1 -s -p \"Press any key to continue...\"\n" )
 #define EXIT_ERR exit(1);
-#define BYTES_PER_ROW 10
 
 /* Type Definitions */
 typedef unsigned long int bytes;
@@ -29,9 +33,16 @@ typedef unsigned char byte;
 void runHexReader(int argc, bin *argv[]);
 
 /**
- * @brief Tests whether the file parsed is valid or not
+ * @brief Parse arguments on command line with optional flag
+ *        Syntax: ./../HexReader <filename> -ascii or -a
+ * @param argc Argument count from main
+ * @param argv Argument vector from main
+ * @param filename a pointer to the filename
+ * @param showAscii flag to display ascii characters:
+ *                  set to 1 if True, 0 otherwise
  */
-void fileTester(int *argc, bin *argv[]);
+void parseArgs(int argc, bin *argv[], bin **filename, 
+               int *showAscii);
 
 /**
  * @brief Checks if the pointer is NULL
@@ -41,7 +52,7 @@ void fileTester(int *argc, bin *argv[]);
 void pointerTester(bin *pointer);
 
 /* ------------------
-* Utilities for file
+* Utilities for file reading
 *  -----------------*/
 
 /**
@@ -59,7 +70,7 @@ bytes getFileSize(FILE *file);
  * @param file Pointer to an opened file
  * @param size File's size in bytes
  * @return byte* a pointer to dynamically allocated memory
- *               with file's contents. 
+ *               with file's contents. (buffer)
  */
 byte *loadFileToMemory(FILE *file, bytes size);
 
@@ -80,7 +91,16 @@ void cleanExit(FILE *file, byte *buffer);
  * @param size size in bytes
  * @param pointer points to data buffer.
  */
-void pointerPrint(bytes size, bin *pointer);
+void pointerPrint(bytes size, bin *pointer, int showAscii);
+
+/**
+ * @brief Helper function to print an ASCII table right next to 
+ *        the HexReader if showAscii is specified
+ * @param bytesPerLine const int declared on pointerPrint
+ * @param iterator iterator from pointerPrint
+ * @param pointer points to data buffer
+ */
+void printAscii(int bytesPerLine, bytes iterator, bin *pointer);
 
 /**
  * @brief Prints a header for the hex reader with columns from 00 to 09
@@ -88,15 +108,19 @@ void pointerPrint(bytes size, bin *pointer);
 void printHeader(void);
 
 /**
- * @brief Prints the hex header and file data
- */
-void displayHexDump(bytes size, bin *pointer);
-
-/**
  * @brief Prints the file's size
  * 
  * @param size in bytes
  */
 void printFileInfo(bytes size);
+
+/**
+ * @brief  Display formatted output with optional ASCII column
+ * 
+ * @param size file size in bytes
+ * @param pointer points to data buffer
+ * @param showAscii flag to whether display ASCII column or not
+ */
+void displayInfo(bytes size, bin *pointer, int showAscii);
 
 #endif

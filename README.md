@@ -2,13 +2,13 @@
 
 During the lectures on my C course, one of the assignments was:
 
-> Exercise: Write a binary reader that shows in the screen all bytes organized in the screen. This bytes vector to show the content must be dynamically allocated. The display should be like:
+- Assignment: Write a binary reader that shows in the screen all bytes organized in the screen. This bytes vector to show the content must be dynamically allocated. The display should be like:
 
 ```
 00 01 02 03 04 05 06 07 08 09
 -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- --
-...
+            ...
 ```
 
 All other dynamic memory allocations functions can be found in the malloc.h library.
