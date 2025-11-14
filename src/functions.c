@@ -4,7 +4,6 @@ void pointerTester(bin *pointer){
     /* If pointing to NULL, then file not successfully loaded */
     if(pointer == NULL){
         printf("Fatal Error!\n");
-        PRESS_KEY;
         EXIT_ERR;
     }
 }

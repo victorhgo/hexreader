@@ -12,7 +12,6 @@
 #include<string.h>
 
 /* Some useful macros */
-#define PRESS_KEY system( "read -n 1 -s -p \"Press any key to continue...\"\n" )
 #define EXIT_ERR exit(1);
 
 /* Type Definitions */

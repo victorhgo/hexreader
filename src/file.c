@@ -49,12 +49,14 @@ byte *loadFileToMemory(FILE *file, bytes size) {
 }
 
 bytes getFileSize(FILE *file){
+
     fseek(file, 0, SEEK_END);
 
-    /* Stores the filesize (in bytes) */
+    /* Stores the filesize */
     bytes size = ftell(file);
     
     rewind(file);
+    
     return size;
 }
 
@@ -69,7 +71,4 @@ void cleanExit(FILE *file, byte *buffer) {
         /* Free buffer*/
         free(buffer);
     }
-
-    /* Press enter to continue */
-    PRESS_KEY;
 }
